@@ -1,0 +1,39 @@
+config:
+  compose_path: ./docker-compose.yml
+ports:
+  - "n8n:5678:5678:true" # Expose n8n web UI
+persistent_volumes:
+  - path: ./n8n-data
+    is_optional: false
+variables:
+  - name: GENERIC_TIMEZONE
+    description: "Set the timezone for n8n, e.g., 'Europe/London'."
+    type: "string"
+    required: true
+    default: "Europe/London"
+  - name: N8N_EMAIL_MODE
+    description: "Set to 'smtp' to use Brevo for transactional emails."
+    type: "string"
+    required: true
+    default: "smtp"
+  - name: N8N_SMTP_HOST
+    description: "Brevo SMTP host (e.g., smtp-relay.brevo.com)."
+    type: "string"
+    required: false
+  - name: N8N_SMTP_PORT
+    description: "Brevo SMTP port (e.g., 587)."
+    type: "number"
+    required: false
+  - name: N8N_SMTP_USER
+    description: "Your Brevo SMTP username (usually your email)."
+    type: "string"
+    required: false
+  - name: N8N_SMTP_PASS
+    description: "Your Brevo SMTP v3 API Key."
+    type: "string"
+    required: false
+    is_password: true
+  - name: N8N_SMTP_SENDER
+    description: "The email address to send from."
+    type: "string"
+    required: false
